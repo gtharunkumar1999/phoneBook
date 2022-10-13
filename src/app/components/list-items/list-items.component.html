@@ -1,58 +1,107 @@
-<div class="main">
-  <div class="container title">
-    <div>
-      <h2>{{ fieldName }} List</h2>
-    </div>
-    <div>
-      <button type="button" class="btn btn-primary" (click)="changeToggle()">
-        Add {{ fieldName }}
-      </button>
-    </div>
-  </div>
-  <div class="card w-50">
-    <ul class="list-group w-100">
-      <li class="list-group-item listing" *ngFor="let item of list">
-        {{ item }}
+<div class="main mt-3">
+  <div class="top">
+    <div class="row">
+      <div class="col-6">
+        <h2>{{ fieldName }} List</h2>
+      </div>
+      <div class="col-6">
         <button
           type="button"
-          class="btn btn-danger"
-          (click)="handleRemove(item)"
-        >
-          Remove
-        </button>
-      </li>
-    </ul>
-    <div class="listing" [hidden]="toggle">
-      <div>
-        <form #f="ngForm">
-          <input
-            ngModel
-            required
-            [(ngModel)]="textBoxValue"
-            pattern="{{ patternType }}"
-            #inputValue="ngModel"
-            name="inputValue"
-            placeholder="{{ fieldName }}"
-            id="inputValue"
-          />
-        </form>
-        <div
-          *ngIf="inputValue.touched && !inputValue.valid"
-          class="alert alert-danger"
-        >
-          {{ fieldName }} is invalid
-        </div>
-      </div>
-      <div>
-        <button
-          type="submit"
-          class="btn btn-success"
-          [disabled]="!inputValue.valid"
-          (click)="handleAdd()"
+          class="btn btn-primary btn-sm w-100"
+          (click)="changeToggle()"
         >
           Add {{ fieldName }}
         </button>
       </div>
     </div>
+  </div>
+
+  <div class="bottom p-2">
+    <div class="listing">
+      <ul class="list-group list-group-flush border-0">
+        <li
+          class="list-group-item d-flex justify-content-between border-0"
+          *ngFor="let item of list"
+        >
+          {{ item }}
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="handleRemove(item)"
+          >
+            Remove
+          </button>
+        </li>
+        <li class="list-group-item border-0" *ngIf="toggle">
+          <div class="row d-flex justify-content-between">
+            <div class="col-6">
+              
+                <input
+                  ngModel
+                  required
+                  [(ngModel)]="textBoxValue"
+                  pattern="{{ patternType }}"
+                  #inputValue="ngModel"
+                  class="form-control"
+                  name="inputValue"
+                  placeholder="{{ fieldName }}"
+                  id="inputValue"
+                />
+              
+              <div
+                *ngIf="inputValue.touched && !inputValue.valid"
+                class="alert alert-danger"
+              >
+                {{ fieldName }} is invalid
+              </div>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+              <button
+                type="submit"
+                class="btn btn-success px-4"
+                [disabled]="!inputValue.valid"
+                (click)="handleAdd()"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="inputField" [hidden]="toggle">
+      <div class="row d-flex justify-content-between">
+        <div class="col-6">
+          <form #f="ngForm">
+            <input
+              ngModel
+              required
+              [(ngModel)]="textBoxValue"
+              pattern="{{ patternType }}"
+              #inputValue="ngModel"
+              name="inputValue"
+              placeholder="{{ fieldName }}"
+              id="inputValue"
+            />
+          </form>
+          <div
+            *ngIf="inputValue.touched && !inputValue.valid"
+            class="alert alert-danger"
+          >
+            {{ fieldName }} is invalid
+          </div>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!inputValue.valid"
+            (click)="handleAdd()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>

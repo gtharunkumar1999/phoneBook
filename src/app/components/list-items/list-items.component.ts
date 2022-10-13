@@ -12,15 +12,16 @@ import { NgForm, ControlContainer } from '@angular/forms';
 @Component({
   selector: 'app-list-items',
   templateUrl: './list-items.component.html',
-  styleUrls: ['./list-items.component.css']})
-
+  styleUrls: ['./list-items.component.css'],
+  providers: [{ provide: ControlContainer, useExisting: NgForm }],
+})
 export class ListItemsComponent implements OnInit {
   @Output() change = new EventEmitter();
   @Input('list') list: any[] = [];
   @Input('fieldName') fieldName?: string;
   @Input('fieldType') fieldType?: string;
-  textBoxValue: string = '';
-  toggle: boolean = true;
+  @Input('textBoxValue')textBoxValue: string = '';
+  @Input('toggle') toggle :boolean=false;
   patternType = this.fieldName === 'Email' ? '' : '';
 
   constructor() {}
@@ -34,6 +35,7 @@ export class ListItemsComponent implements OnInit {
 
   changeToggle() {
     this.toggle = !this.toggle;
+    this.textBoxValue=""
     return this.toggle;
   }
 
@@ -57,5 +59,4 @@ export class ListItemsComponent implements OnInit {
       this.change.emit({ value: itemValue, type: 'Phone', action: 'remove' });
     }
   }
-  
 }

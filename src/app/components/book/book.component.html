@@ -1,84 +1,91 @@
 <div class="main">
-  <div class="top container">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-      <div class="alert alert-success" [hidden]="toggle">Contact saved</div>
-      <div class="row">
-        <div class="col-6">
-          <input
-            type="text"
-            [(ngModel)]="firstNameInput"
-            ngModel
-            name="firstName"
-            required
-            #firstName="ngModel"
-            class="form-control"
-            placeholder="First name"
-          />
-          <div
-            *ngIf="firstName.touched && !firstName.valid"
-            class="alert alert-danger"
-          >
-            First Name is required
+  <div class="card w-50 p-4">
+    <div class="top">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+        <div class="alert alert-success" [hidden]="toggle1">Contact saved</div>
+        <div class="row">
+          <div class="col-6">
+            <input
+              type="text"
+              [(ngModel)]="firstNameInput"
+              ngModel
+              name="firstName"
+              required
+              #firstName="ngModel"
+              class="form-control"
+              placeholder="First name"
+            />
+            <div
+              *ngIf="firstName.touched && !firstName.valid"
+              class="alert alert-danger text-nowrap "
+            >
+              <p>First Name is required</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <input
+              type="text"
+              ngModel
+              [(ngModel)]="lastNameInput"
+              name="lastName"
+              required
+              #lastName="ngModel"
+              class="form-control"
+              placeholder="Last name"
+            />
+            <div
+              *ngIf="!lastName.valid && lastName.touched"
+              class="alert alert-danger"
+            >
+              last Name is required
+            </div>
           </div>
         </div>
-        <div class="col-6">
-          <input
-            type="text"
-            ngModel
-            [(ngModel)]="lastNameInput"
-            name="lastName"
-            required
-            #lastName="ngModel"
-            class="form-control"
-            placeholder="Last name"
-          />
-          <div
-            *ngIf="!lastName.valid && lastName.touched"
-            class="alert alert-danger"
-          >
-            First Name is required
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="middle Container p-4">
-    <app-list-items
-      [list]="emailsList"
-      [fieldName]="email"
-      [fieldType]="'text'"
-      (change)="onChildSubmit($event)"
-    >
-    </app-list-items>
+      </form>
+    </div>
+    <div class="middle">
+      <app-list-items
+        [list]="emailsList"
+        [fieldName]="email"
+        [fieldType]="'text'"
+        [toggle] = "toggle"
+        [textBoxValue]="textBoxValue"
+        (change)="onChildSubmit($event)"
+      >
+      </app-list-items>
 
-    <app-list-items
-      [list]="phoneNumbersList"
-      [fieldName]="phone"
-      [fieldType]="'number'"
-      (change)="onChildSubmit($event)"
-    >
-    </app-list-items>
-  </div>
-  <div class="bottom Container">
-    <div class="row">
-      <div class="col-6">
-        <button
-          type="submit"
-          class="btn btn-success btn-lg"
-          [disabled]="!f.valid"
-          (click)="onSubmit(f)"
-        >
-          save
-        </button>
-      </div>
-      <div class="col-6">
-        <button
-          type="submit"
-          class="btn btn-warning btn-lg"
-          (click)="resetUserForm(f)"
-        >
-          clear
-        </button>
+      <app-list-items
+        [list]="phoneNumbersList"
+        [fieldName]="phone"
+        [fieldType]="'number'"
+        [toggle] = "toggle"
+        [textBoxValue]="textBoxValue"
+        (change)="onChildSubmit($event)"
+      >
+      </app-list-items>
+    </div>
+    <div class="bottom mt-2">
+      <div class="row">
+        <div class="col-5 ">
+          
+        </div>
+        <div class="col-7 d-flex justify-content-around">
+          <button
+            type="submit"
+            class="btn btn-success px-4"
+            [disabled]="!f.valid"
+            (click)="onSubmit(f)"
+          >
+            save
+          </button>
+          <button
+            type="submit"
+            class="btn btn-warning px-4"
+            (click)="resetUserForm(f)"
+          >
+            clear
+          </button>
+        </div>
       </div>
     </div>
   </div>
